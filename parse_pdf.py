@@ -36,6 +36,8 @@ class ParsePDF:
                     f.write(chunk)
         else:
             pass
+        if os.path.getsize(self.filename) == 0:
+            return ''
         with open(self.filename, 'rb') as f:
             f_content = f.read()
             try:
