@@ -31,11 +31,11 @@ class ParsePDF:
             except Exception as exc:
                 raise Exception('pdf download failed: {} - {}'.format(self.link, str(exc)))
             self.filename = 'tmp.pdf'
+            with open(self.filename, 'wb') as f:
+                for chunk in r.iter_content(8192):
+                    f.write(chunk)
         else:
             pass
-        with open(self.filename, 'wb') as f:
-            for chunk in r.iter_content(8192):
-                f.write(chunk)
         with open(self.filename, 'rb') as f:
             f_content = f.read()
             try:
